@@ -12,10 +12,17 @@
   <div id="app">
     <h1>Vue.js Components Fundamentals</h1>
     <click-counter></click-counter>
+    <plan v-for="plan in plans" :name="plan.name" :price="plan.price"></plan>
   </div>
+
   <script type="text/x-template" id="click-counter-template">
     <button @click="count++">{{count}}</button>
   </script>
+  <script type="text/x-template" id="plan-template">
+    <h3>{{name}}</h3>
+    <h3>{{price}}</h3>
+  </script>
+
   <script src="https://unpkg.com/vue@3"></script>
   <script src="app.js"></script>
 </body>
