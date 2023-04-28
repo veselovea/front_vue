@@ -1,16 +1,14 @@
-Vue.createApp({
-    
-})
-.component('click-counter', {
-    template: '#click-counter-template',
-    data() {
-        return {
-            count: 0
-        }
+let PlanComponent = {
+    template: '#plan-template',
+    props: {
+        name: { type: String, default: 'Unknown brain', required: true },
+        price: { type: Number, default: 0, required: true }
     }
-})
-.component('plan-picker', {
+}
+
+let PlanPickerComponent = {
     template: '#plan-picker-template',
+    components: { plan: PlanComponent },
     data() {
         return {
             plans: [ 
@@ -21,12 +19,17 @@ Vue.createApp({
             ]
         }
     }
-})
-.component('plan', {
-    template: '#plan-template',
-    props: {
-        name: { type: String, default: 'Unknown brain', required: true },
-        price: { type: Number, default: 0, required: true }
+}
+
+let ClickCounterComponet = {
+    template: '#click-counter-template',
+    data() {
+        return {
+            count: 0
+        }
     }
-})
-.mount('#app')
+}
+
+const app = Vue.createApp({
+    components: { PlanPicker: PlanPickerComponent }
+}).mount('#app')
