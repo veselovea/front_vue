@@ -27,6 +27,7 @@
                 <label><input type="checkbox" v-model="iceCreamFlavors" value="Banana">Banana</label>
                 <br>
                 <button 
+                    v-bind:disabled="newItem.length < 1"
                     v-on:click="saveItem" 
                     class="btn btn-primary">
                     Save it
@@ -35,6 +36,7 @@
             <ul>
                 <li v-for="item in items" :key="item.id">{{item.label}}</li>
             </ul>
+            <a v-bind:href="newItem">Dynamic link</a>
             <p v-if="items.length === 0">WELL DONE, YOU ARE THE WORK MONSTER!!! U2UUAUWA!</p>
         </div>
         <script src="https://unpkg.com/vue@3"></script>
