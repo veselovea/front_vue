@@ -1,4 +1,16 @@
 Vue.createApp({
+    
+})
+.component('click-counter', {
+    template: '#click-counter-template',
+    data() {
+        return {
+            count: 0
+        }
+    }
+})
+.component('plan-picker', {
+    template: '#plan-picker-template',
     data() {
         return {
             plans: [ 
@@ -6,15 +18,7 @@ Vue.createApp({
             { name: 'GIGA brain', price: 50000 },
             { name: 'Some brain', price: 250 },
             { name: 'One more BRAIN', price: 10 }
-        ]
-        }
-    }
-})
-.component('click-counter', {
-    template: '#click-counter-template',
-    data() {
-        return {
-            count: 0
+            ]
         }
     }
 })
