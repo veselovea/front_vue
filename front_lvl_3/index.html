@@ -16,11 +16,11 @@
       <h2 class="subtitle">
         We travel the world to source the very best single origin brain for you
       </h2>
-      <plan-picker></plan-picker>
+      <plan-picker-item></plan-picker-item>
     </div>
   </div>
 
-  <script type="text/x-template" id="plan-template">
+  <script type="text/x-template" id="plan-item-template">
       <div class="plan" :class="{'active-plan' : selected}" @click="select">
         <div class="description">
           <span class="title">
@@ -29,15 +29,15 @@
         </div>
       </div>
   </script>
-  <script type="text/x-template" id="plan-picker-template">
+  <script type="text/x-template" id="plan-picker-item-template">
     <div class="plans">
-      <plan 
+      <plan-item
         v-for="plan in plans" 
         :name="plan.name"
         :price="plan.price"
         :selected="plan.name === selectedPlan"
         v-on:select="selectPlan"
-      ></plan>
+      ></plan-item>
     </div>
   </script>
   <script src="https://unpkg.com/vue@3"></script>
