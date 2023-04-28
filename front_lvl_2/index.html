@@ -5,6 +5,18 @@
         <title>Shopping List App</title>
         <link rel="stylesheet" href="main.css">
     </head>
+
+    <style>
+        .strikeout {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .priority {
+            color: orange;
+        }
+    </style>
+
     <body>
         <div id="shopping-list">
 
@@ -17,7 +29,7 @@
             <div v-if="editing" class="add-item-form">
                 <input
                     @keyup.enter="saveItem" 
-                    v-model.lazy="newItem" type="text" placeholder="ADD an item">
+                    v-model="newItem" type="text" placeholder="ADD an item">
                 <br>
                 <label><input type="checkbox" v-model="newItemHighPriority">High priority</label>
                 <br>
@@ -34,7 +46,24 @@
                 </button>
             </div>
             <ul>
-                <li v-for="item in items" :key="item.id">{{item.label}}</li>
+                <li v-for="item in items" 
+                    @click="togglePurchared(item)"
+                    :key="item.id" 
+                    :class="{strikeout: item.purchased, priority : item.highPriority}"
+                    class="static-class">
+                    {{item.label}}
+                </li>
+
+                <!-- <li v-for="item in items" 
+                    :key="item.id" 
+                    :class="[
+                        item.purchased ? 'strikeout' : 'underline'
+                        item.highPriority ? 'priority' : 'text-blue'
+                    ]"
+                    class="static-class">
+                    {{item.label}}
+                </li> -->
+
             </ul>
             <a v-bind:href="newItem">Dynamic link</a>
             <p v-if="items.length === 0">WELL DONE, YOU ARE THE WORK MONSTER!!! U2UUAUWA!</p>
@@ -50,21 +79,32 @@
                         newItemHighPriority: false,
                         iceCreamFlavors: [],
                         items: [
-                            {id: 1, label:"10 party hats"},
-                            {id: 2, label:"2 broad games"},
-                            {id: 3, label:"30 cups"}
+                            {id: 1, label:"10 party hats", purchased: true, highPriority: false},
+                            {id: 2, label:"2 broad games", purchased: true, highPriority: false},
+                            {id: 3, label:"30 cups", purchased: false, highPriority: true}
                         ]
                     }
                 },
                 methods: {
                     saveItem() {
-                        this.items.push({id:this.items.length + 1, label: this.newItem})
+                        this.items.push(
+                            {
+                                id:this.items.length + 1,
+                                label: this.newItem,
+                                highPriority: this.newItemHighPriority
+                            })
                         this.newItem = ""
+                        this.newItemHighPriority = false
                     },
 
                     doEdit() {
                         this.editing = !this.editing
                         this.newItem = ""
+                        this.newItemHighPriority = false
+                    },
+
+                    togglePurchared(item) {
+                        item.purchased = !item.purchased
                     }
                 }
             }).mount('#shopping-list')
