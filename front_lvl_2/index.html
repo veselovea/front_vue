@@ -8,7 +8,16 @@
     <body>
         <div id="shopping-list">
             <h1>{{header || "Welcome"}}</h1>
-            
+            <input v-model.lazy="newItem" type="text" placeholder="ADD an item">
+            <br>
+            <label><input type="checkbox" v-model="newItemHighPriority">High priority</label>
+            <br>
+            <label><input type="checkbox" v-model="iceCreamFlavors" value="vanilla">Vanilla</label>
+            <label><input type="checkbox" v-model="iceCreamFlavors" value="chocolate">Chocolate</label>
+            <label><input type="checkbox" v-model="iceCreamFlavors" value="mango">Mango</label>
+            <label><input type="checkbox" v-model="iceCreamFlavors" value="Banana">Banana</label>
+            {{newItem}}
+
             <ul>
                 <li v-for="item in items" :key="item.id">{{item.label}}</li>
             </ul>
@@ -20,6 +29,9 @@
                 data() {
                     return {
                         header: "Vue si ready to party",
+                        newItem: '',
+                        newItemHighPriority: false,
+                        iceCreamFlavors: [],
                         items: [
                             {id: 1, label:"10 party hats"},
                             {id: 2, label:"2 broad games"},
