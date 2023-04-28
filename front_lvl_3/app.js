@@ -1,35 +1,39 @@
 let PlanComponent = {
-    template: '#plan-template',
-    props: {
-        name: { type: String, default: 'Unknown brain', required: true },
-        price: { type: Number, default: 0, required: true }
+  template: '#plan-template',
+  props: {
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    selected: { type: Boolean, default: false },
+  },
+  methods:{
+    select(){
+        this.$emit('select', this.name)
     }
+  }
 }
 
 let PlanPickerComponent = {
-    template: '#plan-picker-template',
-    components: { plan: PlanComponent },
-    data() {
-        return {
-            plans: [ 
+  components: { plan: PlanComponent },
+  template: '#plan-picker-template',
+  data(){
+    return {
+        plans: [ 
             { name: 'Mega brain', price: 500 },
             { name: 'GIGA brain', price: 50000 },
             { name: 'Some brain', price: 250 },
             { name: 'One more BRAIN', price: 10 }
-            ]
-        }
+        ],
+      selectedPlan: null
     }
-}
-
-let ClickCounterComponet = {
-    template: '#click-counter-template',
-    data() {
-        return {
-            count: 0
-        }
+  },
+  methods:{
+    selectPlan(plan){
+      this.selectedPlan = plan
     }
+  }
 }
 
 const app = Vue.createApp({
-    components: { PlanPicker: PlanPickerComponent }
-}).mount('#app')
+  components: { PlanPicker: PlanPickerComponent }
+})
+.mount('#app')
