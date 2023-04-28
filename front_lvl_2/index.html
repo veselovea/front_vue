@@ -30,6 +30,7 @@
                 <input
                     @keyup.enter="saveItem" 
                     v-model="newItem" type="text" placeholder="ADD an item">
+                <p class="counter">{{characterCount}}/200</p>
                 <br>
                 <label><input type="checkbox" v-model="newItemHighPriority">High priority</label>
                 <br>
@@ -39,7 +40,7 @@
                 <label><input type="checkbox" v-model="iceCreamFlavors" value="Banana">Banana</label>
                 <br>
                 <button 
-                    v-bind:disabled="newItem.length < 1"
+                    v-bind:disabled="newItem.length < 1 && newItem.length < 201"
                     v-on:click="saveItem" 
                     class="btn btn-primary">
                     Save it
@@ -66,7 +67,10 @@
 
             </ul>
             <a v-bind:href="newItem">Dynamic link</a>
-            <p v-if="items.length === 0">WELL DONE, YOU ARE THE WORK MONSTER!!! U2UUAUWA!</p>
+            <div v-if="items.length === 0">
+                <p>WELL DONE, YOU ARE THE PARTY MONSTER!!! U2UUAUWA!</p>
+                <img src="https://media.tenor.com/4uetUnNWpVQAAAAd/tyler1-yep.gif">
+            </div>
         </div>
         <script src="https://unpkg.com/vue@3"></script>
         <script>
@@ -85,6 +89,17 @@
                         ]
                     }
                 },
+
+                computed: {
+                    reversedItems() {
+                        return [...this.items].reverse()
+                    },
+                    
+                    characterCount() {
+                        return this.newItem.length
+                    }
+                },
+
                 methods: {
                     saveItem() {
                         this.items.push(
