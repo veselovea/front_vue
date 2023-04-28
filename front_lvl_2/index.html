@@ -10,7 +10,7 @@
             <h1>{{header || "Welcome"}}</h1>
             <div class="add-item-form">
                 <input
-                    @keyup.enter="items.push({id:items.length + 1, label: newItem})" 
+                    @keyup.enter="saveItem" 
                     v-model.lazy="newItem" type="text" placeholder="ADD an item">
                 <br>
                 <label><input type="checkbox" v-model="newItemHighPriority">High priority</label>
@@ -21,7 +21,7 @@
                 <label><input type="checkbox" v-model="iceCreamFlavors" value="Banana">Banana</label>
                 <br>
                 <button 
-                    v-on:click="items.push({id:items.length + 1, label: newItem})" 
+                    v-on:click="saveItem" 
                     class="btn btn-primaty">Save it
                 </button>
             </div>
@@ -44,6 +44,12 @@
                             {id: 2, label:"2 broad games"},
                             {id: 3, label:"30 cups"}
                         ]
+                    }
+                },
+                methods: {
+                    saveItem() {
+                        this.items.push({id:this.items.length + 1, label: this.newItem})
+                        this.newItem = ""
                     }
                 }
             }).mount('#shopping-list')
