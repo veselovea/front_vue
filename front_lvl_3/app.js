@@ -1,3 +1,16 @@
+let ToDoItemComponent = {
+  template: "#todo-item-template",
+  props: {
+    name: String,
+    description: String
+  },
+  data() {
+    return {
+      done: false
+    }
+  }
+}
+
 let PlanItemComponent = {
   template: '#plan-item-template',
   props: {
@@ -34,6 +47,9 @@ let PlanPickerItemComponent = {
 }
 
 const app = Vue.createApp({
-  components: { PlanPickerItem: PlanPickerItemComponent }
+  components: { 
+      PlanPickerItem: PlanPickerItemComponent,
+      TodoItem: ToDoItemComponent
+  }
 })
 .mount('#app')

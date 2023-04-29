@@ -17,6 +17,24 @@
         We travel the world to source the very best single origin brain for you
       </h2>
       <plan-picker-item></plan-picker-item>
+      <todo-item>
+        Front LEVEL 1
+        <template #description>
+          <p>JS Fundamenta lsntasdl;qwke</p>
+        </template>
+      </todo-item>
+      <todo-item>
+        Front LEVEL 2
+        <template v-slot:description>
+          <p>VUE3 BEGGINERS</p>
+        </template>
+      </todo-item>
+      <todo-item>
+        Front LEVEL 3
+        <template v-slot:description>
+          <p>VUE3 LOVERS</p>
+        </template>
+      </todo-item>
     </div>
   </div>
 
@@ -29,6 +47,7 @@
         </div>
       </div>
   </script>
+
   <script type="text/x-template" id="plan-picker-item-template">
     <div class="plans">
       <plan-item
@@ -40,9 +59,27 @@
       ></plan-item>
     </div>
   </script>
+
+  <script type="text/x-template" id="todo-item-template">
+    <div>
+      <input type="checkbox" v-model="done">
+      <span :class="{done}">
+        <slot></slot>
+      </span>
+      <slot name="description"></slot>
+    </div>
+  </script>
+
   <script src="https://unpkg.com/vue@3"></script>
   <script src="app.js"></script>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .done {
+      color: green;
+      text-decoration: line-through;
+    }
+  </style>
 </body>
 
 </html>
